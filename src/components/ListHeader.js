@@ -35,7 +35,7 @@ const ListHeader = props => (
             <Icon name="bars" size={30} color="#2C2605" />
         </TouchableOpacity>
         {props.search ?
-            <Input placeholder='Search' onChangeText={text => props.onChangeText(text)} value={props.searchText} />
+            <Input placeholder='Filter' onChangeText={text => props.onChangeText(text)} value={props.searchText} />
             :
             <Title>{props.title}</Title>
         }

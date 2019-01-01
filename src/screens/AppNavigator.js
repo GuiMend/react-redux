@@ -1,6 +1,7 @@
 import { createSwitchNavigator, createStackNavigator, createAppContainer } from 'react-navigation';
 import Home from './Home';
 import List from './List';
+import Details from './Details';
 
 const additionalSettings = {
     defaultNavigationOptions: {
@@ -17,7 +18,7 @@ const additionalSettings = {
 
 const WelcomeStack = createStackNavigator({ Home: { screen: Home, navigationOptions: { header: null } } }, { ...additionalSettings });
 
-const AppNavigator = createStackNavigator({ List: { screen: List } }, { ...additionalSettings, initialRouteName: 'List' });
+const AppNavigator = createStackNavigator({ List: { screen: List }, Details: { screen: Details } }, { ...additionalSettings, initialRouteName: 'List' });
 
 export default createAppContainer(createSwitchNavigator(
     {

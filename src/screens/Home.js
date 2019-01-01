@@ -36,7 +36,7 @@ const Home = props =>
         />
         <Title>Welcome to the best book listing app in the world!</Title>
         <Wrapper>
-            <Button big={true} onPress={() => props.navigation.navigate('List')} title="Let's go!" />
+            <Button onPress={() => props.navigation.navigate('List')} title="Let's go!" />
             <Subtitle>Click the button to start your quest for the perfect book</Subtitle>
         </Wrapper>
     </Content>

@@ -79,7 +79,7 @@ class List extends Component {
                                 selectBook(book.selfLink)
                                 navigation.navigate('Details')
                             }}>
-                                <Cover lastInColumn={i % 3 === 0} small={true} coverURL={book.volumeInfo.imageLinks.smallThumbnail} />
+                                <Cover firstInColumn={i % 3 === 0} small={true} coverURL={book.volumeInfo.imageLinks.smallThumbnail} />
                             </TouchableOpacity>
                         )}
                 </BooksWrapper>

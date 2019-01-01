@@ -13,6 +13,7 @@ import createSagaMiddleware from 'redux-saga'
 import logger from 'redux-logger'
 import { AppNavigator } from './screens'
 import reducer from './ducks'
+import rootSaga from './sagas/rootSaga'
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -20,6 +21,8 @@ const store = createStore(
   reducer,
   applyMiddleware(logger, sagaMiddleware)
 )
+
+sagaMiddleware.run(rootSaga)
 
 export default class App extends Component {
   render() {

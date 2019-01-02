@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components/native'
-import { Text, RefreshControl, TouchableOpacity } from 'react-native'
-import ListHeader from '../components/ListHeader'
+import { Text, RefreshControl, TouchableOpacity, ActivityIndicator } from 'react-native'
+import Header from '../components/Header'
 import { fetchBooksAction, fetchSelectedBookAction } from '../ducks/books/actions'
 import { Cover } from '../components/Book'
 
 const Wrapper = styled.ScrollView`
-    margin: 16px;
+    padding: 16px;
 `
 
 const BooksWrapper = styled.View`
@@ -21,10 +21,12 @@ class List extends Component {
     state = {
         searchText: '',
         title: 'Design Books',
-        search: false
+        search: false,
+        refresh: false
     }
 
     _onRefresh = () => {
+        this.setState({ refresh: true })
         this.props.onFetchBooks(this.state.title)
     }
 
@@ -46,7 +48,7 @@ class List extends Component {
     static navigationOptions = ({ navigation }) => {
         const { params } = navigation.state;
 
-        return params ? { header: <ListHeader {...params} /> } : { header: null }
+        return params ? { header: <Header {...params} /> } : { header: null }
     }
 
     componentDidMount() {
@@ -60,7 +62,7 @@ class List extends Component {
 
     render() {
         const { loading, books, selectBook, navigation } = this.props
-        const { searchText } = this.state
+        const { searchText, refresh } = this.state
         return (
             <Wrapper
                 refreshControl={
@@ -70,6 +72,7 @@ class List extends Component {
                     />
                 }
             >
+                {loading && !refresh && <ActivityIndicator size="large" color="#9F8B0C" />}
                 {books.items && books.items.length === 0 && <Text>No books were found... :(</Text>}
                 <BooksWrapper>
                     {books.items && books.items.length !== 0 && books.items
@@ -77,7 +80,7 @@ class List extends Component {
                         .map((book, i) =>
                             <TouchableOpacity key={i} onPress={() => {
                                 selectBook(book.selfLink)
-                                navigation.navigate('Details')
+                                navigation.navigate('Details', navigation.state.params)
                             }}>
                                 <Cover firstInColumn={i % 3 === 0} small={true} coverURL={book.volumeInfo.imageLinks.smallThumbnail} />
                             </TouchableOpacity>

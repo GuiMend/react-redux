@@ -1,5 +1,21 @@
 import * as types from './actionTypes'
 
+export const rateBookAction = (book, rating) => ({
+    type: types.RATE_BOOK,
+    book,
+    rating
+})
+
+export const buyBookAction = book => ({
+    type: types.BUY_BOOK,
+    book
+})
+
+export const favBookAction = book => ({
+    type: types.FAV_BOOK,
+    book
+})
+
 export const fetchBooksAction = query => ({
     type: types.FETCH_BOOKS,
     query
